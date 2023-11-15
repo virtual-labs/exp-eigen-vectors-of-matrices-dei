@@ -1,0 +1,11 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="16" height="16" fill="white" />
+  <path d="M 2.5 0.5 Q -0.5 8 2.5 15.5" stroke="#2163A4" stroke-linecap="round" fill="none" aria-label="(" />
+  <g transform="translate(0.5,0.5)">
+    <polyline points="4,3, 5,2, 5,6, 4,6, 6,6" fill="none" stroke="red" stroke-linejoin="round" stroke-linecap="round" aria-label="1" />
+    <ellipse cx="10" cy="4" rx="1" ry="2" fill="none" stroke="green" aria-label="0" />
+    <ellipse cx="5" cy="11" rx="1" ry="2" fill="none" stroke="green" aria-label="0" />
+    <polyline points="9,10, 10,9, 10,13, 9,13, 11,13" fill="none" stroke="red" stroke-linejoin="round" stroke-linecap="round" aria-label="1" />
+  </g>
+  <path d="M 13.5 0.5 Q 16.5 8 13.5 15.5" stroke="#2163A4" stroke-linecap="round" fill="none" aria-label=")" />
+</svg>
