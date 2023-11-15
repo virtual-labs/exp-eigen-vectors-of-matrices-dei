@@ -1030,17 +1030,18 @@ function main() {
             '  </div>' +
             '</div>' +
             '<div role="group">' +
-            '  <button type="button" aria-pressed="mixed" class="swap-mode-button"></button>' +
-            '  <button type="button" aria-pressed="mixed" class="numbers-only-mode-button">⌨</button>' +
-            '  <button type="button" class="upload-image"><span>📷︎</span></button>' +
-            '  <input type="file" name="upload" accept="image/*" hidden />' +
-            '  <button type="button" class="undo-button" disabled hidden>↶</button>' +
-            '  <button type="button" class="redo-button" disabled hidden>↷</button>' +
-            '  <button type="button" class="clear-table-button"><span>🧹︎</span></button>' +
             '  <span class="div-nowrap">' +
             '    <button type="button" class="increment-size-button resize-table-button" data-increment="+1">+</button>' +
             '    <button type="button" class="decrement-size-button resize-table-button" data-increment="-1">&minus;</button>' +
             '  </span>' +
+            '  <button type="button" aria-pressed="mixed" style=" visibility: hidden;" class="swap-mode-button"></button>' +
+            '  <button type="button" aria-pressed="mixed" class="numbers-only-mode-button">⌨</button>' +
+            '  <button type="button" class="upload-image" style=" visibility: hidden;"><span>📷︎</span></button>' +
+            '  <input type="file" name="upload" accept="image/*" hidden />' +
+            '  <button type="button" class="undo-button" disabled hidden>↶</button>' +
+            '  <button type="button" class="redo-button" disabled hidden>↷</button>' +
+            '  <button type="button" class="clear-table-button" style=" visibility: hidden;"><span>🧹︎</span></button>' +
+           
             '</div>';
 
         var insertTableTemplate = document.createElement('div');
@@ -1364,7 +1365,7 @@ function main() {
                     var previous = r.previousElementSibling;
                     //r.parentNode.removeChild(r);
                     r.style.display = 'none';
-                    r = previous;
+                    r = previous;line
                 }
             }
         };
@@ -3129,43 +3130,7 @@ function main() {
             window.history.replaceState(window.history.state, document.title, window.location.href.replace(/#[^#]*$/g, '') + hash);
         };
 
-        Utils.on("click", ".clear-all-button", function(event) {
-            var actHistory = actHistoryStorage.getActHistory();
-
-            hit({
-                click: "clear-all-button"
-            });
-            document.getElementById("resdiv").textContent = "";
-            actHistoryStorage.clear();
-            //!
-            lastHash = "";
-            setLocationHash("");
-
-            //TODO: undo for single item removal (!)
-            var undoButton = document.getElementById('undo-clear-button');
-            undoButton.onclick = function() {
-                //TODO: set all at once (?)
-                for (var id in actHistory) {
-                    if (Object.prototype.hasOwnProperty.call(actHistory, id)) {
-                        var item = actHistory[id].item;
-                        actHistoryStorage.setItem(id, item); //TODO: id
-                        zInsAct(item.resultHTML,
-                            item.resultMatrix,
-                            item.details,
-                            item.expressionString,
-                            id,
-                            item.detailsHTML, {
-                                isLoading: true
-                            });
-                    }
-                }
-                undoButton.onclick = null;
-                undoButton.disabled = true;
-                undoButton.hidden = true; //TODO: !?
-            };
-            undoButton.disabled = false;
-            undoButton.hidden = false;
-        });
+       
 
 
         Utils.initialize(".decimal-fraction-digits-controls", function(element) {
@@ -3678,7 +3643,7 @@ function main() {
         insertButtonsTemplate.innerHTML = '<div role="group" class="insert-buttons">' +
             '<div><button type="button" class="print-matrix-button" data-act-history-id="" data-print-matrix-to="A"></button></div>' +
             '<div><button type="button" class="print-matrix-button" data-act-history-id="" data-print-matrix-to="B"></button></div>' +
-            '<div><button type="button" class="clear-button" data-act-history-id=""></button></div>' +
+            '<div><button type="button" class="clear-button"; data-act-history-id=""></button></div>' +
             '<div><button type="button" class="share-item-button" data-act-history-id="" title="" hidden></button></div>' +
             '</div>';
 
@@ -3703,10 +3668,7 @@ function main() {
             insertButtons.querySelector(".clear-button").textContent = document.getElementById('i18n-buttons-clear').textContent; // i18n.buttons.clear;
             insertButtons.querySelector(".clear-button").setAttribute("data-act-history-id", actHistoryId);
 
-            var shareButton = insertButtons.querySelector(".share-item-button");
-            shareButton.title = document.getElementById('i18n-appButtons-share').textContent;
-            shareButton.hidden = window.navigator.share == null;
-            shareButton.setAttribute("data-act-history-id", actHistoryId);
+            
 
             var add = function(html) {
                 var div = document.createElement("div");
