@@ -1,4 +1,3 @@
-/* those styles are from https://html.spec.whatwg.org/multipage/rendering.html */
 
 .no-dialog dialog {
     display: none;
@@ -6,7 +5,7 @@
     margin: auto;
     border: solid;
     padding: 1em;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     color: black;
 }
 
@@ -25,18 +24,22 @@
 
 .no-details-summary details {
     display: block;
+    
 }
 
 .no-details-summary details>* {
     display: none;
+   
 }
 
 .no-details-summary details>summary {
     display: block;
+   
 }
 
 .no-details-summary details[open]>* {
     display: block;
+    
 }
 
 .css-profile math,
@@ -236,8 +239,6 @@
     /* ? */
     font-size: 0.71em;
 }
-
-/* Thanks to http://www.w3.org/TR/mathml-for-css/ */
 
 .math mroot,
 .math msqrt {
@@ -810,7 +811,6 @@ html {
     overflow-y: scroll;
     background-color: white;
     background-color: var(--color-background);
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="40" viewBox="0 0 60 40"><g stroke="ghostwhite" stroke-width="1" stroke-linecap="square"><line x1="0.5" y1="19.5" x2="59.5" y2="19.5" /><line x1="0.5" y1="39.5" x2="59.5" y2="39.5" /><line x1="19.5" y1="0.5" x2="19.5" y2="39.5" /><line x1="39.5" y1="0.5" x2="39.5" y2="39.5" /><line x1="59.5" y1="0.5" x2="59.5" y2="39.5" /></g></svg>');
     background-size: 60px 40px;
     background-position: -1px -1px;
     font-size: 17px;
@@ -856,6 +856,7 @@ summary {
     color: #3C78C2;
     color: var(--color-links);
     text-decoration: none;
+    
 }
 
 div[tabindex],
@@ -873,11 +874,13 @@ summary:focus,
 summary:hover,
 summary:active {
     text-decoration: underline;
+    
 }
 
 a:active,
 summary:active {
     color: #2163A4;
+   
 }
 
 input,
@@ -2456,11 +2459,13 @@ details>summary:hover,
 details>summary:focus {
     background-color: gainsboro;
     color: black;
+    
 }
 
 details>summary::-webkit-details-marker {
     color: #242424;
     color: var(--color-text);
+    
 }
 
 details>summary::marker {
@@ -2471,7 +2476,9 @@ details>summary::marker {
 details>summary:before {
     color: #242424;
     color: var(--color-text);
+    visibility: hidden;
 }
+
 
 .standard-dialog {
     color: #242424;
@@ -2674,6 +2681,7 @@ mn {
 
 details>summary {
     list-style-type: none;
+    visibility: hidden;
 }
 
 details>summary::-webkit-details-marker {
