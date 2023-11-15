@@ -1,13 +1,148 @@
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+<html lang="en" dir="ltr" data-version-tag="?20230404T194925Z" data-root-path="./">
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-		<!-- Your code goes here-->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="application-name" content="matrixcalc" />
+    <meta name="theme-color" content="#2B5797" />
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+    <script defer src="./mjs.js?20230404T194925Z" fetchpriority="high"></script>
+    <script async src="./mjs2.js?20230404T194925Z" fetchpriority="low"></script>
+    <script async src="./compiled.expression.js?20230404T194925Z" fetchpriority="low"></script>
+    <link rel="preload" href="./i18n-en.json?20230404T194925Z" as="fetch" crossorigin="anonymous" fetchpriority="low" />
+
+    <link rel ="stylesheet" href ="mystyle.css">
+    <link href="mcss.css?20230404T194925Z" rel="stylesheet" type="text/css">
+
+    <!--link rel="manifest" href="manifest.json" /-->
+    
+    <title>Eigenvalues and Eigenvectors matrix</title>
+</head>
+
+<header id="header">
+	<button class="menu-btn" id="head-btn" onclick="dispmenu()">
+		<div class="bar"></div>
+		<div class="bar"></div>
+		<div class="bar"></div>
+	</button>
+	<a href="https://www.vlab.co.in/"><img src="https://www.vlab.co.in/images/logo.jpg"></a>
+			<div class="right-head">
+	</div>
+</header>
+<section class="csection" id="csec">
+	<nav class="side-nav" id="navbar">
+	<div class="nav-element">
+		<a href="index.html " ><span class="cp">Aim</span></a>
+	</div>
+	<div class="nav-element">
+		<a href="theory.html" >Theory</a>
+	</div>
+	<div class="nav-element">
+		<a href="objective.html" >Objective</a>
+	</div>
+	<div class="nav-element">
+		<a href="pretest.html" >Pretest</a>
+	</div>
+	<div class="nav-element">
+		<a href="procedure.html" >Procedure</a>
+	</div>
+	<div class="nav-element">
+		<a href="simulation_1/index.html">Simulation</a>
+	</div>
+	<div class="nav-element">
+		<a href="posttest.html" >Posttest</a>
+	</div>
+	<div class="nav-element">
+		<a href="references.html" >References</a>
+	</div>
+	<div class="nav-element">
+		<a href="feedback.html" >Feedback</a>
+	</div>
+	</nav>
+<body>
+    <div id="bigtable">
+        <div id="left">
+            <nav class="menu">
+            <aside>
+                <div class="ads-container">
+                    <div class="adsbygoogle-container">
+                        <!-- unit1 -->
+                        <ins class="adsbygoogle" data-ad-client="ca-pub-2322099551790862" data-ad-slot="6667750747" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    </div>
+                    <div>
+                        <button type="button" class="toggle-ads-button">
+            <!-- <span>Hide Ads</span>
+            <span hidden>Show Ads</span> -->
+          </button>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+        <div id="right">
+            <main>
+                <h1>Finding out eigen-values and eigen-vectors of matrices.</h1>
+                <br>
+                <br>
+                <form class="main-form">
+                    <fieldset>
+                        <legend>Enter the Matrix :</legend>
+                        <div class="insert-table" data-id="A" data-sizes="3x3" data-type="simple"></div>
+                    </fieldset>
+                    <div>
+                        <button type="button" class="expression-button" data-expression="eigenvectors(A)">Find</button>
+                    </div>
+                    <!-- <fieldset class="more-fieldset">
+                        <legend>More:</legend>
+                        <button type="button" class="expression-button" data-expression="diagonalize A">Diagonal matrix</button>
+                        <button type="button" class="expression-button" data-expression="Jordan-decomposition A">Jordan decomposition</button>
+                        <button type="button" class="expression-button" data-expression="exp(A)">Matrix exponential</button>
+                        <button type="button" class="expression-button" data-expression="svd A">Singular Value Decomposition</button>
+                    </fieldset> -->
+                </form>
+                <div class="line">
+
+                    <div class="decimal-fraction-digits-controls">
+                       
+        <span hidden id="frdigitsspan"><!--
+          --><span>, </span>
+                        <!--
+          --><label for="frdigits"><!--
+            --><select id="rounding-type"><!--
+              --><option value="fractionDigits" selected>number of fraction digits: </option><!--
+              --><option value="significantDigits">number of significant digits: </option><!--
+            --></select><!--
+          --></label>
+                        <!--
+          --><input type="number" min="1" step="1" id="frdigits" value="3" />
+                        <!--
+        -->
+                        </span>
+                    </div>
+
+                    <div>
+                        <button type="button" id="undo-clear-button" title="" hidden>↶</button>
+                        <!--
+          --><button type="button" class="clear-all-button">Clean</button>
+                    </div>
+                </div>
+                <section id="resdiv" aria-live="polite" aria-label="Results"></section>
+
+            </main>
+            <div class="from-cookie" hidden></div>
+            <div hidden>
+                <span id="i18n-buttons-clear">Clean</span>
+                <span id="i18n-buttons-cells">Cells</span>
+                <span id="i18n-or">or</span>
+                <span id="i18n-appButtons-share">Share</span>
+                <span id="i18n-buttons-insertIn">Insert in</span>
+                <span id="i18n-use-decimal-keyboard-on-mobile-phones">Use decimal keyboard on mobile phones</span>
+                <span id="i18n-buttons-upload-image">Upload an image with a matrix (Note: it may not work well)</span>
+            </div>
+
+        </div>
+    </div>
 </body>
+
 </html>
