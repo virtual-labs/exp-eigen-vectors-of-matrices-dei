@@ -2,37 +2,27 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "What defines an eigenvector?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "A vector that changes direction when multiplied by a matrix ",
+        "b": "A vector that remains parallel to its original direction when multiplied by a matrix ",
+        "c": "A vector with zero magnitude ",
+        "d": "A vector perpendicular to the matrix"
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
+
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "The eigenvalue represents:",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "The matrix's determinant",
+        "b": "The scaling factor of an eigenvector",
+        "c": "The total number of matrix rows ",
+        "d": "The matrix's inverse"
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "c",
+
+      "correctAnswer": "b",
       "difficulty": "beginner"
     }
   ]
