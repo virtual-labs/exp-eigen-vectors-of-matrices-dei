@@ -1,148 +1,225 @@
-    <!DOCTYPE html>
-<html lang="en" dir="ltr" data-version-tag="?20230404T194925Z" data-root-path="./">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="application-name" content="matrixcalc" />
-    <meta name="theme-color" content="#2B5797" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eigenvalues and Eigenvectors Experiment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .page-title {
+            text-align: center;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 800px;
+        }
+        .page-title h2 {
+            margin: 0;
+        }
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: calc(100vh - 200px);
+        }
+        .box {
+            flex: 1;
+            background: rgb(255, 255, 255);
+            padding: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            width: 380px;
+            max-width: 380px;
+            overflow: hidden;
+        }
+        .box-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .box-title {
+            background-color: #2c3e50;
+            color: white;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .input-box label, 
+        .input-box button, 
+        .input-box input[type="number"] {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+        }
+        input[type="number"], 
+        button {
+            padding: 10px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #333;
+        }
+        #matrix-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-grow: 1;
+        }
+        .matrix-cell {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .matrix-cell input[type="range"] {
+            width: 100%;
+        }
+        .matrix-cell span {
+            margin-top: 5px;
+        }
+        #result {
+            margin-top: 20px;
+            overflow-y: auto;
+        }
+        .simulate-button {
+            margin-top: auto;
+            padding: 15px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 0 0 8px 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .simulate-button:hover {
+            background: #333;
+        }
 
-    <script defer src="./mjs.js?20230404T194925Z" fetchpriority="high"></script>
-    <script async src="./mjs2.js?20230404T194925Z" fetchpriority="low"></script>
-    <script async src="./compiled.expression.js?20230404T194925Z" fetchpriority="low"></script>
-    <link rel="preload" href="./i18n-en.json?20230404T194925Z" as="fetch" crossorigin="anonymous" fetchpriority="low" />
-
-    <link rel ="stylesheet" href ="mystyle.css">
-    <link href="mcss.css?20230404T194925Z" rel="stylesheet" type="text/css">
-
-    <!--link rel="manifest" href="manifest.json" /-->
-    
-    <title>Eigenvalues and Eigenvectors matrix</title>
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .box {
+                width: 100%;
+                max-width: 350px;
+            }
+            .page-title {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
-
-<header id="header">
-	<button class="menu-btn" id="head-btn" onclick="dispmenu()">
-		<div class="bar"></div>
-		<div class="bar"></div>
-		<div class="bar"></div>
-	</button>
-	<a href="https://www.vlab.co.in/"><img src="https://www.vlab.co.in/images/logo.jpg"></a>
-			<div class="right-head">
-	</div>
-</header>
-<section class="csection" id="csec">
-	<nav class="side-nav" id="navbar">
-	<div class="nav-element">
-		<a href="index.html " ><span class="cp">Aim</span></a>
-	</div>
-	<div class="nav-element">
-		<a href="theory.html" >Theory</a>
-	</div>
-	<div class="nav-element">
-		<a href="objective.html" >Objective</a>
-	</div>
-	<div class="nav-element">
-		<a href="pretest.html" >Pretest</a>
-	</div>
-	<div class="nav-element">
-		<a href="procedure.html" >Procedure</a>
-	</div>
-	<div class="nav-element">
-		<a href="simulation_1/index.html">Simulation</a>
-	</div>
-	<div class="nav-element">
-		<a href="posttest.html" >Posttest</a>
-	</div>
-	<div class="nav-element">
-		<a href="references.html" >References</a>
-	</div>
-	<div class="nav-element">
-		<a href="feedback.html" >Feedback</a>
-	</div>
-	</nav>
 <body>
-    <div id="bigtable">
-        <div id="left">
-            <nav class="menu">
-            <aside>
-                <div class="ads-container">
-                    <div class="adsbygoogle-container">
-                        <!-- unit1 -->
-                        <ins class="adsbygoogle" data-ad-client="ca-pub-2322099551790862" data-ad-slot="6667750747" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    </div>
-                    <div>
-                        <button type="button" class="toggle-ads-button">
-            <!-- <span>Hide Ads</span>
-            <span hidden>Show Ads</span> -->
-          </button>
-                    </div>
-                </div>
-            </aside>
+    <div class="page-title">
+        <h2>Finding out Eigen Values and Eigen Vector of matrices</h2>
+    </div>
 
-        </div>
-        <div id="right">
-            <main>
-                <h1>Finding out eigen-values and eigen-vectors of matrices.</h1>
-                <br>
-                <br>
-                <form class="main-form">
-                    <fieldset>
-                        <legend>Enter the Matrix :</legend>
-                        <div class="insert-table" data-id="A" data-sizes="3x3" data-type="simple"></div>
-                    </fieldset>
-                    <div>
-                        <button type="button" class="expression-button" data-expression="eigenvectors(A)">Find</button>
-                    </div>
-                    <!-- <fieldset class="more-fieldset">
-                        <legend>More:</legend>
-                        <button type="button" class="expression-button" data-expression="diagonalize A">Diagonal matrix</button>
-                        <button type="button" class="expression-button" data-expression="Jordan-decomposition A">Jordan decomposition</button>
-                        <button type="button" class="expression-button" data-expression="exp(A)">Matrix exponential</button>
-                        <button type="button" class="expression-button" data-expression="svd A">Singular Value Decomposition</button>
-                    </fieldset> -->
-                </form>
-                <div class="line">
-
-                    <div class="decimal-fraction-digits-controls">
-                       
-        <span hidden id="frdigitsspan"><!--
-          --><span>, </span>
-                        <!--
-          --><label for="frdigits"><!--
-            --><select id="rounding-type"><!--
-              --><option value="fractionDigits" selected>number of fraction digits: </option><!--
-              --><option value="significantDigits">number of significant digits: </option><!--
-            --></select><!--
-          --></label>
-                        <!--
-          --><input type="number" min="1" step="1" id="frdigits" value="3" />
-                        <!--
-        -->
-                        </span>
-                    </div>
-
-                    <div>
-                        <button type="button" id="undo-clear-button" title="" hidden>↶</button>
-                        <!--
-          -->
-                    </div>
-                </div>
-                <section id="resdiv" aria-live="polite" aria-label="Results"></section>
-
-            </main>
-            <div class="from-cookie" hidden></div>
-            <div hidden>
-                <span id="i18n-buttons-clear">Clean</span>
-                <span id="i18n-buttons-cells">Cells</span>
-                <span id="i18n-or">or</span>
-                <span id="i18n-appButtons-share">Share</span>
-                <span id="i18n-buttons-insertIn">Insert in</span>
-                <span id="i18n-use-decimal-keyboard-on-mobile-phones">Use decimal keyboard on mobile phones</span>
-                <span id="i18n-buttons-upload-image">Upload an image with a matrix (Note: it may not work well)</span>
+    <div class="main-container">
+        <!-- Input Section -->
+        <div class="box input-box">
+            <h3 class="box-title">Input Parameters</h3>
+            <div class="box-content">
+                <label for="matrixSize"><center><b>Enter Matrix Size:</b></label>
+                <input type="number" id="matrixSize" min="2" max="10" placeholder="Enter matrix size (e.g., 3 for 3x3)">
+                
+                <button onclick="generateMatrix()">Generate Matrix</button>
+                
+                <div id="matrix-container"></div>
             </div>
+            <button class="simulate-button" onclick="calculateEigen()">Simulate</button>
+        </div>
 
+        <!-- Output Section -->
+        <div class="box output-box">
+            <h3 class="box-title">Results</h3>
+            <div class="box-content">
+                <div id="result"></div>
+            </div>
         </div>
     </div>
-</body>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+    <script>
+        function generateMatrix() {
+            const size = parseInt(document.getElementById("matrixSize").value);
+            if (isNaN(size) || size < 2 || size > 10) {
+                alert("Please enter a valid matrix size between 2 and 10.");
+                return;
+            }
+            const container = document.getElementById("matrix-container");
+            container.innerHTML = '';  // Clear previous matrix
+
+            container.style.gridTemplateColumns = `repeat(${size}, 1fr)`; // Adjust grid columns based on size
+
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'matrix-cell';
+
+                    // Create slider with default range -10 to 10
+                    cell.innerHTML = `
+                        <input type="range" id="m${i}${j}" min="-10" max="10" value="0" step="1" 
+                               oninput="document.getElementById('val${i}${j}').textContent = this.value">
+                        <span id="val${i}${j}">0</span>
+                    `;
+                    container.appendChild(cell);
+                }
+            }
+        }
+
+        function calculateEigen() {
+            const size = parseInt(document.getElementById("matrixSize").value);
+            let matrix = [];
+
+            // Build the matrix from slider values
+            for (let i = 0; i < size; i++) {
+                let row = [];
+                for (let j = 0; j < size; j++) {
+                    const value = parseFloat(document.getElementById(`m${i}${j}`).value);
+                    row.push(value);
+                }
+                matrix.push(row);
+            }
+
+            // Perform eigenvalue and eigenvector calculations
+            let eig = numeric.eig(matrix);
+            let eigenvalues = eig.lambda.x;
+            let eigenvectors = eig.E.x;
+
+            // Display the results
+            document.getElementById("result").innerHTML = `
+                <h3>Eigenvalues:</h3>
+                <p>${eigenvalues.join(", ")}</p>
+                <h3>Eigenvectors:</h3>
+                <p>${eigenvectors.map(v => "[" + v.join(", ") + "]").join("<br>")}</p>
+            `;
+        }
+    </script>
+</body>
 </html>
