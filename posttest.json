@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "For a 3x3 matrix, how many eigenvalues are possible?",
+      "answers": {
+        "a": "Always 2",
+        "b": "Always 4",
+        "c": "Always 3 ",
+        "d": "Depends on matrix complexity"
+      },
+
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "A matrix with real eigenvalues is:?",
+      "answers": {
+        "a": "Always symmetric ",
+        "b": "Always invertible ",
+        "c": "Always diagonal ",
+        "d": "Always triangular"
+      },
+
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    }
+  ]
+}
