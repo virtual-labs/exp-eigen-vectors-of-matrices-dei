@@ -1,1 +1,28 @@
-The eigenvalues and eigenvectors experiment explores fundamental linear transformation principles in mathematics, revealing how matrices modify vector characteristics. When a matrix transforms a vector, an eigenvector maintains its original directional orientation, while the corresponding eigenvalue represents the scaling factor of this transformation. This computational process involves solving complex mathematical equations to determine unique scalar values (eigenvalues) and their associated vectors that remain parallel during matrix multiplication. By utilizing numeric computational methods, the experiment enables users to interactively generate matrices between 2x2 and 10x10, dynamically calculate eigenvalues and eigenvectors, and visually understand how linear transformations impact geometric representations. The significance of this mathematical exploration extends across diverse fields including physics, engineering, computer graphics, and machine learning, where understanding matrix transformations provides critical insights into system behaviors, dimensional reductions, and structural analyses. Through an intuitive interface allowing real-time slider-based matrix configuration, the experiment bridges abstract mathematical concepts with practical, interactive learning, demonstrating how seemingly complex linear algebraic principles can be explored and comprehended through systematic computational techniques.
+### Theory
+
+Eigenvalues and eigenvectors are fundamental concepts in linear algebra that help describe how a linear transformation affects geometric objects such as vectors and shapes. When a matrix transforms a vector, the result typically changes both its direction and magnitude. However, some special vectors maintain their direction even after transformation — these are called eigenvectors.
+
+For a square matrix \( A \), if there exists a non-zero vector \( v \) such that the matrix multiplication results in a scaled version of the same vector:
+
+A · v = λ · v
+
+Then:
+- \( v \) is called an **eigenvector**
+- \( λ \) is called the corresponding **eigenvalue**
+
+Eigenvalues indicate how much the eigenvector is scaled during the transformation. Each eigenvalue is associated with one or more eigenvectors that share this scaling behavior.
+
+To find eigenvalues, we solve the **characteristic equation** obtained from the matrix:
+
+det(A − λI) = 0
+
+Once the eigenvalues are known, the eigenvectors are computed by substituting each eigenvalue back into the equation (A − λI)v = 0 and solving for v.
+
+Eigenvalues and eigenvectors have important applications in many scientific and engineering fields:
+- Principal Component Analysis (PCA) in data science
+- Vibration modes in mechanical systems
+- Stability analysis in control engineering
+- Quantum mechanics
+- Image compression and feature extraction
+
+In this experiment, the matrix values are entered using interactive sliders. The system then automatically calculates eigenvalues and their corresponding eigenvectors, allowing for visualization and deeper understanding of how matrix transformations behave.
