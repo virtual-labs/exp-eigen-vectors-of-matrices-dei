@@ -1,15 +1,26 @@
-Step 1. Matrix Size Selection
-- Choose matrix size between 2x2 and 10x10
-- Enter size in "Enter Matrix Size" input field
-- Click "Generate Matrix" button
-Step 2. Matrix Value Configuration
-- Adjust sliders for each matrix cell
-- Sliders range from -10 to 10
-- Each slider displays its current numeric value
-- Configure matrix by moving sliders to desired values
-Step 3. Eigenvalue and Eigenvector Calculation
-- Click "Simulate" button
-- System automatically computes:
-  * Eigenvalues
-  * Corresponding eigenvectors
-Step 4. Observe how matrix values affect eigenvalues/vectors
+### Procedure
+
+1. **Enter Matrix Size**
+   - Specify the size of the matrix (e.g., 2 for a 2×2 matrix, 3 for a 3×3 matrix).
+
+2. **Generate the Matrix**
+   - Click on the **Generate Matrix** button.
+   - Input sliders will appear according to the selected matrix size.
+
+3. **Set Matrix Elements**
+   - Adjust the sliders to assign numerical values to each element of the matrix.
+   - Ensure that all entries are correctly set as per the experiment requirement.
+
+4. **Run the Computation**
+   - Click on the **Simulate** button to perform eigenvalue and eigenvector calculations.
+
+5. **Observe Numerical Output**
+   - The computed **eigenvalues** will be displayed in the result section.
+   - The corresponding **eigenvectors** will also be shown below the eigenvalues.
+
+6. **Analyze the Result**
+   - Verify the relationship: Av = λv for each eigenvalue–eigenvector pair.
+   - Compare the results for different matrix values to observe changes in scaling and direction.
+
+7. **Repeat for Other Matrices (Optional)**
+   - Change matrix size or elements to explore how eigenvalues and eigenvectors vary for different matrices.
