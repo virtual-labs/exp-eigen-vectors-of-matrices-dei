@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finding out eigen-values and eigen-vectors of matrices.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #fffeff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .left-panel, .right-panel {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .panel-title {
+            color: #2C3E50 ;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        h1 {
+            color: #ffffff;
+            background: #2C3E50;
+            padding: 20px 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .size-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 80px;
+        }
+
+        .matrix-container {
+            display: inline-grid;
+            gap: 8px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .matrix-input {
+            width: 70px;
+            height: 50px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .matrix-input:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            background: #2C3E50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .results h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .eigenvalue {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #2C3E50;
+        }
+
+        .eigenvalue h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .vector {
+            font-family: 'Courier New', monospace;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .error {
+            color: #e74c3c;
+            background: #ffeaea;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1> Finding out eigen-values and eigen-vectors of matrices</h1>
+    <div class="container">
+        <p class="subtitle"></p>
+
+        <div class="content-wrapper">
+            <div class="left-panel">
+                <h2 class="panel-title"><b><Center>Input Parameters</Center></b></h2>
+                
+                <div class="input-section">
+                    <label>Matrix Size:</label>
+                    <div class="size-selector">
+                        <input type="number" id="matrixSize" min="2" max="5" value="2">
+                        <button onclick="generateMatrix()" style="width: auto; padding: 10px 20px; margin: 0;">Generate Matrix</button>
+                    </div>
+
+                    <label>Enter Matrix Values:</label>
+                    <div id="matrixContainer"></div>
+
+                    <button onclick="calculate()">Simulate</button>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <h2 class="panel-title"><center><b>Results</b></center></h2>
+                <div id="results">
+                    <p style="color: #999; text-align: center; padding: 40px 20px;">
+                        Results will be Displayed here..
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+    <script>
+        let matrixSize = 2;
+
+        function generateMatrix() {
+            matrixSize = parseInt(document.getElementById('matrixSize').value);
+            const container = document.getElementById('matrixContainer');
+            container.innerHTML = '';
+            
+            const matrixDiv = document.createElement('div');
+            matrixDiv.className = 'matrix-container';
+            matrixDiv.style.gridTemplateColumns = `repeat(${matrixSize}, 70px)`;
+            
+            for (let i = 0; i < matrixSize * matrixSize; i++) {
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.className = 'matrix-input';
+                input.id = `cell-${i}`;
+                input.value = '0';
+                input.step = '0.1';
+                matrixDiv.appendChild(input);
+            }
+            
+            container.appendChild(matrixDiv);
+        }
+
+        function loadPreset(type) {
+            generateMatrix();
+            
+            if (type === 'identity') {
+                for (let i = 0; i < matrixSize; i++) {
+                    for (let j = 0; j < matrixSize; j++) {
+                        const idx = i * matrixSize + j;
+                        document.getElementById(`cell-${idx}`).value = (i === j) ? '1' : '0';
+                    }
+                }
+            } else if (type === 'diagonal') {
+                for (let i = 0; i < matrixSize; i++) {
+                    for (let j = 0; j < matrixSize; j++) {
+                        const idx = i * matrixSize + j;
+                        document.getElementById(`cell-${idx}`).value = (i === j) ? (i + 1) : '0';
+                    }
+                }
+            } else if (type === 'example') {
+                if (matrixSize === 2) {
+                    document.getElementById('cell-0').value = '2';
+                    document.getElementById('cell-1').value = '1';
+                    document.getElementById('cell-2').value = '1';
+                    document.getElementById('cell-3').value = '2';
+                } else {
+                    for (let i = 0; i < matrixSize; i++) {
+                        for (let j = 0; j < matrixSize; j++) {
+                            const idx = i * matrixSize + j;
+                            document.getElementById(`cell-${idx}`).value = Math.floor(Math.random() * 5);
+                        }
+                    }
+                }
+            }
+        }
+
+        function getMatrixFromInputs() {
+            const matrix = [];
+            for (let i = 0; i < matrixSize; i++) {
+                const row = [];
+                for (let j = 0; j < matrixSize; j++) {
+                    const idx = i * matrixSize + j;
+                    const value = parseFloat(document.getElementById(`cell-${idx}`).value);
+                    row.push(value);
+                }
+                matrix.push(row);
+            }
+            return matrix;
+        }
+
+        function formatNumber(num) {
+            if (Math.abs(num) < 1e-10) return '0';
+            if (Math.abs(num - Math.round(num)) < 1e-10) return Math.round(num).toString();
+            return num.toFixed(4);
+        }
+
+        function formatComplex(value) {
+            if (typeof value === 'object' && value.re !== undefined) {
+                const re = formatNumber(value.re);
+                const im = formatNumber(value.im);
+                if (im === '0') return re;
+                if (re === '0') return `${im}i`;
+                return `${re} ${im >= 0 ? '+' : ''}${im}i`;
+            }
+            return formatNumber(value);
+        }
+
+        function loadPreset(type) {
+            generateMatrix();
+            
+            if (type === 'identity') {
+                for (let i = 0; i < matrixSize; i++) {
+                    for (let j = 0; j < matrixSize; j++) {
+                        const idx = i * matrixSize + j;
+                        document.getElementById(`cell-${idx}`).value = (i === j) ? '1' : '0';
+                    }
+                }
+            } else if (type === 'diagonal') {
+                for (let i = 0; i < matrixSize; i++) {
+                    for (let j = 0; j < matrixSize; j++) {
+                        const idx = i * matrixSize + j;
+                        document.getElementById(`cell-${idx}`).value = (i === j) ? (i + 1) : '0';
+                    }
+                }
+            } else if (type === 'example') {
+                if (matrixSize === 2) {
+                    document.getElementById('cell-0').value = '2';
+                    document.getElementById('cell-1').value = '1';
+                    document.getElementById('cell-2').value = '1';
+                    document.getElementById('cell-3').value = '2';
+                } else {
+                    for (let i = 0; i < matrixSize; i++) {
+                        for (let j = 0; j < matrixSize; j++) {
+                            const idx = i * matrixSize + j;
+                            document.getElementById(`cell-${idx}`).value = Math.floor(Math.random() * 5);
+                        }
+                    }
+                }
+            }
+        }
+
+        function calculate() {
+            try {
+                const matrix = getMatrixFromInputs();
+                
+                // Calculate eigenvalues and eigenvectors
+                const result = math.eigs(matrix);
+                
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '';
+                
+                const eigenvalues = result.values;
+                const eigenvectors = result.vectors;
+                
+                for (let i = 0; i < eigenvalues.length; i++) {
+                    const eigenDiv = document.createElement('div');
+                    eigenDiv.className = 'eigenvalue';
+                    
+                    const eigenvalue = eigenvalues[i];
+                    const eigenvector = eigenvectors.map(row => row[i]);
+                    
+                    let vectorHTML = '<div class="vector">[<br>';
+                    eigenvector.forEach(val => {
+                        vectorHTML += `&nbsp;&nbsp;${formatComplex(val)}<br>`;
+                    });
+                    vectorHTML += ']</div>';
+                    
+                    eigenDiv.innerHTML = `
+                        <h3>Eigenvalue ${i + 1}: λ = ${formatComplex(eigenvalue)}</h3>
+                        <p><strong>Eigenvector:</strong></p>
+                        ${vectorHTML}
+                    `;
+                    
+                    resultsDiv.appendChild(eigenDiv);
+                }
+                
+            } catch (error) {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = `<div class="error"><strong>Error:</strong> ${error.message}</div>`;
+            }
+        }
+
+        // Initialize with a 2x2 matrix
+        generateMatrix();
+    </script>
+<script src="../assets/js/iframeResize.js"></script>
+        
+        </body>
+</html>

@@ -1,0 +1,105 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "What defines an eigenvector?",
+      "answers": {
+        "a": "A vector that changes direction when multiplied by a matrix",
+        "b": "A vector that remains parallel to its original direction when multiplied by a matrix",
+        "c": "A vector with zero magnitude",
+        "d": "A vector perpendicular to the matrix"
+      },
+      "correctAnswer": "b"
+    },
+    {
+      "question": "The eigenvalue represents:",
+      "answers": {
+        "a": "The matrix's determinant",
+        "b": "The scaling factor of an eigenvector",
+        "c": "The total number of matrix rows",
+        "d": "The matrix's inverse"
+      },
+      "correctAnswer": "b"
+    },
+    {
+      "question": "Eigenvalues are found by solving:",
+      "answers": {
+        "a": "Matrix inverse",
+        "b": "Characteristic equation",
+        "c": "Row reduction",
+        "d": "Graph plotting"
+      },
+      "correctAnswer": "b"
+    },
+    {
+      "question": "If Av = λv, then v is:",
+      "answers": {
+        "a": "A zero vector",
+        "b": "A scalar",
+        "c": "An eigenvector",
+        "d": "A pivot element"
+      },
+      "correctAnswer": "c"
+    },
+    {
+      "question": "Eigenvalues can be:",
+      "answers": {
+        "a": "Only positive numbers",
+        "b": "Real or complex numbers",
+        "c": "Always zero",
+        "d": "Only whole numbers"
+      },
+      "correctAnswer": "b"
+    },
+    {
+      "question": "Eigenvectors must be:",
+      "answers": {
+        "a": "Non-zero vectors",
+        "b": "Zero vectors only",
+        "c": "Square matrices",
+        "d": "Orthogonal always"
+      },
+      "correctAnswer": "a"
+    },
+    {
+      "question": "Eigenvalues help identify:",
+      "answers": {
+        "a": "Scaling behavior under transformation",
+        "b": "Color of vector arrows",
+        "c": "Matrix dimensions",
+        "d": "Transpose of the matrix"
+      },
+      "correctAnswer": "a"
+    },
+    {
+      "question": "In which field are eigenvalues widely used?",
+      "answers": {
+        "a": "Principal Component Analysis (PCA)",
+        "b": "Grammar correction",
+        "c": "Sports commentary",
+        "d": "Cooking recipes"
+      },
+      "correctAnswer": "a"
+    },
+    {
+      "question": "A matrix with distinct eigenvalues has eigenvectors that are usually:",
+      "answers": {
+        "a": "Linearly independent",
+        "b": "Linearly dependent",
+        "c": "Zero vectors",
+        "d": "Non-existant"
+      },
+      "correctAnswer": "a"
+    },
+    {
+      "question": "Eigenvector direction under transformation:",
+      "answers": {
+        "a": "Changes randomly",
+        "b": "Is preserved",
+        "c": "Becomes orthogonal always",
+        "d": "Gets destroyed"
+      },
+      "correctAnswer": "b"
+    }
+  ]
+}
